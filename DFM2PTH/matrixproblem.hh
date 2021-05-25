@@ -179,15 +179,15 @@ public:
             // energy flux is mass flux times specific enthalpy
             if (IsInjectCO2_)
                 // inject air. negative values mean injection
-			{
+		{
             	values[contiCO2EqIdx] = -InjectionRate_; // kg/(s*m^2)
             	values[energyEqIdx] = values[contiCO2EqIdx]*FluidSystem::enthalpy(fs, nPhaseIdx);
-			}
-			else
-			{
+		}
+             else
+		{
                 values[contiH2OEqIdx] = -InjectionRate_; // kg/(s*m^2)
             	values[energyEqIdx] = values[contiH2OEqIdx]*FluidSystem::enthalpy(fs, wPhaseIdx);
-			}
+		}
         }
 
         if (globalPos[1] < 75 + eps_ && globalPos[1] > 25 - eps_ && globalPos[0] > this->gridGeometry().bBoxMax()[0] - eps_)
@@ -204,17 +204,17 @@ public:
 
             if (IsInjectCO2_)
                 // inject air. negative values mean injection
-			{
+		{
             	values[contiCO2EqIdx] = InjectionRate_ * fs.saturation(nPhaseIdx); // kg/(s*m^2)
             	values[contiH2OEqIdx] = InjectionRate_ * fs.saturation(wPhaseIdx);
             	values[energyEqIdx] = values[contiCO2EqIdx]*FluidSystem::enthalpy(fs, nPhaseIdx) + values[contiH2OEqIdx]*FluidSystem::enthalpy(fs, wPhaseIdx);
-			}
-			else
-			{
+		}
+	    else
+		{
                 values[contiH2OEqIdx] = InjectionRate_; // kg/(s*m^2)
             	values[energyEqIdx] = values[contiH2OEqIdx]*FluidSystem::enthalpy(fs, wPhaseIdx);
-			}
-        }
+		}
+	}
 
         return values;
     }
